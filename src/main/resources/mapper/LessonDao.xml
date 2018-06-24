@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.LessonDao">
+    <select id="queryById" parameterType="long" resultType="com.ssm.entity.Lesson" >
+        <!-- 具体的sql -->
+        SELECT
+          lesson_id,
+          name,
+          introd,
+          number
+        FROM
+          lesson
+        WHERE
+          lesson_id = #{lessonId}
+    </select>
+
+    <select id="querySome" parameterType="com.ssm.entity.Lesson" resultType="com.ssm.entity.Lesson">
+        <!--具体的sql语法-->
+        SELECT
+          lesson_id,
+          name,
+          introd,
+          number
+        FROM
+          lesson
+        <where>
+            <!-- <if test="name !=null and !&quot;&quot;.equals(name.trim())">  -->
+            and name like '%' #{name} '%'
+            <!--  </if>   -->
+        </where>
+    </select>
+
+    <select id="queryAll" resultType="com.ssm.entity.Lesson">
+        SELECT
+          lesson_id,
+          name,
+          introd,
+          number
+        FROM
+          lesson
+        ORDER BY
+          lesson_id
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <update id="reduceNumber">
+        UPDATE lesson
+        SET number = number - 1
+        WHERE
+        lesson_id = #{lessonId}
+        AND number > 0
+    </update>
+
+</mapper>
