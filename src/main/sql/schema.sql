@@ -1,3 +1,6 @@
+-- 创建数据库
+CREATE DATABASE lessonappointment;
+
 -- 创建图书表
 CREATE TABLE `lesson` (
   `lesson_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '课程ID',
